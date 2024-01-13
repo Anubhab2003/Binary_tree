@@ -16,6 +16,15 @@ public class HeightofTree{
         int rh=height(root.right);
         return Math.max(lh,rh)+1;
     }
+    public static int count(Node root){
+        if(root==null){
+            return 0;
+        }
+        int lc=count(root.left);
+        int rc=count(root.right);
+        return lc+rc+1;
+    }
+    
     public static void main(String args[]){
         Node root=new Node(1);
         root.left=new Node(2);
@@ -25,5 +34,7 @@ public class HeightofTree{
         root.right.left=new Node(6);
         root.right.right=new Node(7);
         System.out.println(height(root));
+        System.out.println(count(root));
+        
     }
 }
