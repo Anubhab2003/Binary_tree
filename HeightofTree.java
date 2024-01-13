@@ -32,16 +32,32 @@ public class HeightofTree{
         int rsum=sum(root.right);
         return lsum + rsum + root.data;
     } */
-    public static int diameter(Node root){
+    public static int diameter2(Node root){
         if(root==null){
             return 0;
         }
-        int ld=diameter(root.left);
-        int rd=diameter(root.right);
+        int ld=diameter2(root.left);
+        int rd=diameter2(root.right);
         int lh=height(root.left);
         int rh=height(root.right);
         int sd=lh+rh+1;
         return Math.max(sd,Math.max(ld,rd));
+
+    }
+    static class Info{
+        int diam;
+        int ht;
+        public Info(int diam,int ht){
+            this.diam=diam;
+            this.ht=ht;
+        }
+    }
+    public static Info diameter(Node root){
+        Info leftInfo=diameter(root.left);
+        Info rightInfo=diameter(root.right);
+        int diam=Math.max(Math.max(leftInfo,rightInfo),leftInfo.ht+rightInfo.ht);
+        int ht=Math.max(leftInfo.ht,rightInfo.ht)+1;
+        return new Info(diam,ht);
 
     }
     public static void main(String args[]){
@@ -55,7 +71,8 @@ public class HeightofTree{
         System.out.println(height(root));
         System.out.println(count(root));
         //System.out.println(sum(root.data));
-        System.out.println(diameter(root));
+        System.out.println(diameter2(root));
+        System.out.println(diameter(root).diam);
 
     }
 }
