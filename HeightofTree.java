@@ -102,6 +102,21 @@ public class HeightofTree {
         path.remove(path.size() - 1);
         return false;
     }
+    public static Node lca2(Node root,int n1,int n2){
+        if(root==null||root.data==n1||root.data==n2){
+            return root;
+        }
+        Node leftlca=lca2(root.left,n1,n2);
+        Node rightlca=lca2(root.right,n1,n2);
+        if(rightlca==null){
+            return leftlca;
+        }
+        if(leftlca==null){
+            return rightlca;
+        }
+        return root;
+
+    }
 
     public static void main(String args[]) {
         Node root = new Node(1);
@@ -117,5 +132,6 @@ public class HeightofTree {
         System.out.println("Diameter of the tree (method 1): " + diameter2(root));
         System.out.println("Diameter of the tree (method 2): " + diameter(root).diam);
         System.out.println("Lowest Common Ancestor of 4 and 5: " + lca(root, 4, 5).data);
+        System.out.println("Lowest Common Ancestor of 4 and 5: " + lca2(root, 4, 5).data);
     }
 }
