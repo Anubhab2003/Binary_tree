@@ -1,3 +1,4 @@
+import java.util.*;
 public class Build{
     static class Node{
         int data;
@@ -21,6 +22,21 @@ public class Build{
         }
         return root;
     }
+    public static boolean search(Node root, int key){
+        if(root==null){
+            return false;
+        }
+        if(root.data==key){
+            return true;
+        }
+        if(root.data>key){
+            //Left subtree
+            return search(root.left,key);
+        }else{
+            //Right subtree
+            return search(root.right,key);
+        }
+    }
     public static void main(String args[]){
         int values[]={5,1,3,4,2,7};
         Node root=null;
@@ -34,8 +50,18 @@ public class Build{
         if(root==null){
             return;
         }
+        
         inorder(root.left);
         System.out.print(root.data+" ");
         inorder(root.right);
+        System.out.println();
+        //System.out.print("SIR ENTER THE KEY:");
+        // Scanner i=new Scanner(System.in);
+        // int key=i.nextInt();
+        if(search(root,5)){
+            System.out.println("SIR WE HAVE FOUND");
+        }else{
+            System.out.println("Sir UNFORTUNATLY WE HAVEN'T FOUND IT");
+        }
     }
 }
